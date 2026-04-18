@@ -1,15 +1,15 @@
 # Reporte Estadístico: Efecto del Tratamiento sobre el Peso Seco de Plantas
 
-**Asignatura:** Estadística Inferencial ||  
-**Equipo:** Lizeth Hernandez Hernandez - Emilio Sanchez Estrada - Carlos Alberto Lule 
-**Fecha:** 23/04/2026
+**Asignatura:** Estadística Aplicada
+**Equipo:** Lizeth Hernández Hernández · Emilio Sánchez Estrada · Carlos Alberto Lule
+**Fecha:** 25/04/2026
 **Dataset:** PlantGrowth (R Core Team, 2023)
 
 ---
 
 ## 1. Introducción
 
-Se realizó un análisis de varianza de un factor (ANOVA de una vía) para examinar el efecto de diferentes tratamientos sobre el peso seco de plantas (en gramos). El estudio empleó el diseño completamente aleatorio (DCA), en el que las unidades experimentales fueron asignadas de forma aleatoria a uno de tres grupos: control (*ctrl*), tratamiento 1 (*trt1*) y tratamiento 2 (*trt2*). El conjunto de datos corresponde al dataset `PlantGrowth`, disponible en el entorno base de R (R Core Team, 2023).
+Se realizó un análisis de varianza de un factor (ANOVA de una vía) para examinar el efecto de diferentes tratamientos sobre el peso seco de plantas (en gramos). El estudio empleó el **diseño completamente aleatorio (DCA)**, en el que las unidades experimentales fueron asignadas de forma aleatoria a uno de tres grupos: control (*ctrl*), tratamiento 1 (*trt1*) y tratamiento 2 (*trt2*). El conjunto de datos corresponde al dataset `PlantGrowth`, disponible en el entorno base de R (R Core Team, 2023).
 
 ---
 
@@ -23,18 +23,19 @@ El estudio incluyó *N* = 30 observaciones distribuidas equitativamente en tres 
 
 El modelo lineal del DCA es:
 
-$$Y_{ij} = \mu + \tau_i + \varepsilon_{ij}$$
+![formula modelo](https://latex.codecogs.com/svg.image?Y_{ij}=\mu+\tau_i+\varepsilon_{ij})
 
-donde $Y_{ij}$ es la *j*-ésima observación del *i*-ésimo tratamiento, $\mu$ es la media general, $\tau_i$ es el efecto del *i*-ésimo tratamiento, y $\varepsilon_{ij} \sim N(0, \sigma^2)$ es el error aleatorio.
+donde ![Yij](https://latex.codecogs.com/svg.image?Y_{ij}) es la *j*-ésima observación del *i*-ésimo tratamiento, ![mu](https://latex.codecogs.com/svg.image?\mu) es la media general, ![tau](https://latex.codecogs.com/svg.image?\tau_i) es el efecto del *i*-ésimo tratamiento, y ![epsilon](https://latex.codecogs.com/svg.image?\varepsilon_{ij}\sim%20N(0,\sigma^2)) es el error aleatorio.
 
 ### 2.3 Hipótesis
 
-$$H_0: \mu_1 = \mu_2 = \mu_3$$
-$$H_1: \text{Al menos un } \mu_i \neq \mu_j$$
+![H0](https://latex.codecogs.com/svg.image?H_0:\mu_1=\mu_2=\mu_3)
+
+![H1](https://latex.codecogs.com/svg.image?H_1:\text{Al%20menos%20un%20}\mu_i\neq\mu_j)
 
 ### 2.4 Nivel de significancia
 
-Se estableció un nivel de significancia $\alpha = .05$ para todas las pruebas estadísticas.
+Se estableció un nivel de significancia ![alpha](https://latex.codecogs.com/svg.image?\alpha=.05) para todas las pruebas estadísticas.
 
 ---
 
@@ -42,34 +43,54 @@ Se estableció un nivel de significancia $\alpha = .05$ para todas las pruebas e
 
 ### 3.1 Estadísticas descriptivas
 
-*Tabla 1*
-
+**Tabla 1**
 *Estadísticas descriptivas del peso seco de plantas por grupo de tratamiento*
 
-| Grupo        |  *n* | *M* (g) | *DE* (g) | CV (%) | IC 95% inferior | IC 95% superior |
-|:-------------|:----:|:-------:|:--------:|:------:|:---------------:|:---------------:|
-| Control      |  10  |  5.032  |  0.5832  |  11.59 |     4.615       |     5.449       |
-| Tratamiento 1|  10  |  4.661  |  0.7936  |  17.03 |     4.093       |     5.229       |
-| Tratamiento 2|  10  |  5.526  |  0.4425  |   8.01 |     5.209       |     5.843       |
+| Grupo         |  *n* | *M* (g) | *DE* (g) | CV (%) | IC 95% inferior | IC 95% superior |
+|:--------------|:----:|:-------:|:--------:|:------:|:---------------:|:---------------:|
+| Control       |  10  |  5.032  |  0.5832  |  11.59 |     4.615       |     5.449       |
+| Tratamiento 1 |  10  |  4.661  |  0.7936  |  17.03 |     4.093       |     5.229       |
+| Tratamiento 2 |  10  |  5.526  |  0.4425  |   8.01 |     5.209       |     5.843       |
 
-*Nota.* M = media aritmética; DE = desviación estándar muestral; CV = coeficiente de variación; IC = intervalo de confianza para la media. Los intervalos de confianza se calcularon con la distribución *t* de Student (*gl* = 9).
+*Nota.* M = media aritmética; DE = desviación estándar muestral; CV = coeficiente de variación; IC = intervalo de confianza para la media calculado con distribución *t* de Student (*gl* = 9).
 
-Las medias observadas sugieren que el tratamiento 2 produjo plantas con mayor peso seco (*M* = 5.526 g, *DE* = 0.442), seguido por el grupo control (*M* = 5.032 g, *DE* = 0.583) y el tratamiento 1 (*M* = 4.661 g, *DE* = 0.794). El coeficiente de variación indica una variabilidad baja en el grupo control (CV = 11.59%) y en el tratamiento 2 (CV = 8.01%), mientras que el tratamiento 1 presentó una variabilidad moderada (CV = 17.03%).
+Las medias observadas sugieren que el tratamiento 2 produjo plantas con mayor peso seco (*M* = 5.526 g, *DE* = 0.442), seguido por el grupo control (*M* = 5.032 g, *DE* = 0.583) y el tratamiento 1 (*M* = 4.661 g, *DE* = 0.794). El coeficiente de variación indica variabilidad baja en el control (CV = 11.59%) y en trt2 (CV = 8.01%), y variabilidad moderada en trt1 (CV = 17.03%).
+
+#### Figura 1 — Comparación de peso seco por tratamiento (Boxplot)
+
+![Boxplot comparativo](src/codigo/outputs/01_boxplot_comparativo.png)
+
+*Nota.* Cada caja representa el rango intercuartílico (Q1–Q3). La línea central es la mediana. Las muescas indican el IC 95% de la mediana. Los puntos superpuestos corresponden a las observaciones individuales. La ausencia de solapamiento entre las muescas de trt1 y trt2 sugiere diferencia significativa entre sus medianas.
+
+---
+
+#### Figura 2 — Distribución del peso seco por grupo (Histogramas + KDE)
+
+![Histogramas con densidad](src/codigo/outputs/02_histogramas_densidad.png)
+
+*Nota.* La curva superpuesta corresponde a la estimación de densidad por kernel (KDE) con ancho de banda de Scott. La línea discontinua vertical indica la media del grupo. La forma aproximadamente simétrica y unimodal en los tres grupos es consistente con el supuesto de normalidad.
+
+---
 
 ### 3.2 Verificación de supuestos
 
-Previo al análisis de varianza, se verificaron los supuestos del modelo.
+#### Figura 3 — Q-Q Plots de normalidad por grupo
 
-**Normalidad.** Se aplicó la prueba de Shapiro-Wilk a cada grupo por separado. Los resultados indicaron que la distribución del peso seco no difirió significativamente de la normal en ninguno de los tres grupos: control, *W*(10) = 0.9571, *p* = .752; tratamiento 1, *W*(10) = 0.9302, *p* = .449; tratamiento 2, *W*(10) = 0.9411, *p* = .564. Por tanto, el supuesto de normalidad se consideró satisfecho.
+![QQ Plots](src/codigo/outputs/03_qqplots_normalidad.png)
 
-**Homogeneidad de varianzas.** La prueba de Levene no reveló diferencias significativas entre las varianzas de los grupos, *F*(2, 27) = 1.119, *p* = .341, lo que indica que el supuesto de homocedasticidad se cumplió.
+*Nota.* Los puntos representan los cuantiles observados versus los cuantiles teóricos de una distribución normal estándar. El alineamiento sobre la línea de referencia diagonal indica normalidad. Los valores R² elevados confirman el buen ajuste.
 
-**Independencia.** Las observaciones son independientes por diseño experimental: cada planta constituyó una unidad experimental distinta y la asignación de tratamientos fue completamente aleatoria.
+**Normalidad.** Se aplicó la prueba de Shapiro-Wilk a cada grupo. Los resultados no mostraron desviaciones significativas en ningún grupo: control, *W*(10) = 0.9571, *p* = .752; tratamiento 1, *W*(10) = 0.9302, *p* = .449; tratamiento 2, *W*(10) = 0.9411, *p* = .564. Supuesto ✅ **satisfecho**.
 
-### 3.3 Análisis de varianza
+**Homogeneidad de varianzas.** La prueba de Levene no reveló diferencias significativas entre varianzas, *F*(2, 27) = 1.119, *p* = .341. Supuesto ✅ **satisfecho**.
 
-*Tabla 2*
+**Independencia.** Cada planta constituyó una unidad experimental distinta con asignación completamente aleatoria. Supuesto ✅ **garantizado por diseño**.
 
+---
+
+### 3.3 Análisis de Varianza
+
+**Tabla 2**
 *Tabla ANOVA para el efecto del tratamiento sobre el peso seco de las plantas*
 
 | Fuente de variación |  *GL* |    *SC*   |   *CM*   |   *F*  |   *p*  |  *η²*  |
@@ -78,35 +99,51 @@ Previo al análisis de varianza, se verificaron los supuestos del modelo.
 | Error (Residual)    |  27   |  10.4921  |  0.3886  |   —    |   —    |   —    |
 | Total               |  29   |  14.2584  |    —     |   —    |   —    |   —    |
 
-*Nota.* GL = grados de libertad; SC = suma de cuadrados; CM = cuadrado medio; η² = eta cuadrado (tamaño del efecto). El valor crítico de F para α = .05 con GL(2, 27) es F_c = 3.354.
+*Nota.* GL = grados de libertad; SC = suma de cuadrados; CM = cuadrado medio; η² = eta cuadrado. Valor crítico F(2, 27) = 3.354 para α = .05.
 
-Se realizó un análisis de varianza de un factor para examinar el efecto del tratamiento en el peso seco de las plantas. Los resultados indicaron que **existe un efecto significativo del tratamiento**, *F*(2, 27) = 4.846, *p* = .016, η² = .26.
+#### Figura 4 — Distribución F de Fisher con zonas de decisión
 
-El tamaño del efecto η² = .26 indica que el 26.4% de la variabilidad total en el peso seco de las plantas es explicado por el tipo de tratamiento, lo que corresponde a un efecto **grande** según los criterios de Cohen (1988), quien establece η² ≥ .14 como umbral para efectos grandes.
+![Distribución F](src/codigo/outputs/04_distribucion_F_fisher.png)
 
-### 3.4 Intervalos de confianza al 95% para las medias
+*Nota.* La zona sombreada en rojo representa la región de rechazo (α = .05). La línea azul sólida indica el estadístico F calculado (F = 4.846). La línea roja discontinua indica el valor crítico F_c = 3.354. Dado que F calculado > F crítico, se rechaza H₀.
 
-Los intervalos de confianza al 95% para las medias de cada grupo fueron: control [4.615, 5.449], tratamiento 1 [4.093, 5.229] y tratamiento 2 [5.209, 5.843]. La ausencia de solapamiento entre los intervalos del tratamiento 1 y el tratamiento 2 proporciona evidencia visual adicional de una diferencia significativa entre estos dos grupos.
-
----
-
-## 4. Discusión de supuestos y alternativas
-
-### 4.1 Consecuencias de la violación de supuestos
-
-| Supuesto violado       | Consecuencia                                                                 | Alternativa recomendada                              |
-|:-----------------------|:-----------------------------------------------------------------------------|:-----------------------------------------------------|
-| Normalidad             | El estadístico F pierde robustez; los p-valores se vuelven inexactos         | Prueba de Kruskal-Wallis (no paramétrica)             |
-| Homocedasticidad       | Inflación del error Tipo I; el CME subestima o sobreestima la varianza real  | Welch's ANOVA (ajusta los grados de libertad)        |
-| Independencia          | Correlación entre residuos; el modelo lineal es estructuralmente inválido    | ANOVA de medidas repetidas o modelos mixtos           |
-
-En el presente estudio, los tres supuestos fueron satisfechos, por lo que el ANOVA paramétrico de una vía es el método apropiado.
+Los resultados indicaron que **existe un efecto significativo del tratamiento**, *F*(2, 27) = 4.846, *p* = .016, η² = .26. El tamaño del efecto indica que el **26.4% de la variabilidad total** en el peso seco es explicado por el tipo de tratamiento — efecto **grande** según Cohen (1988).
 
 ---
 
-## 5. Conclusión
+### 3.4 Intervalos de confianza al 95%
 
-Los resultados del análisis de varianza indicaron un efecto estadísticamente significativo del tratamiento sobre el peso seco de las plantas, *F*(2, 27) = 4.846, *p* = .016, η² = .26. El tratamiento 2 produjo el mayor peso seco promedio (*M* = 5.526 g), seguido por el grupo control (*M* = 5.032 g) y el tratamiento 1 (*M* = 4.661 g). Se rechaza la hipótesis nula de igualdad de medias a un nivel de significancia de .05.
+#### Figura 5 — Medias con intervalos de confianza al 95%
+
+![Intervalos de confianza](src/codigo/outputs/05_intervalos_confianza.png)
+
+*Nota.* Los puntos representan las medias observadas. Las barras de error son IC 95% con distribución *t*. La línea discontinua horizontal es la gran media (Ȳ.. = 5.073 g). La ausencia de solapamiento entre trt1 y trt2 es evidencia visual de diferencia significativa.
+
+Los IC al 95% fueron: control [4.615, 5.449], tratamiento 1 [4.093, 5.229] y tratamiento 2 [5.209, 5.843].
+
+---
+
+## 4. Reporte Estadístico Formal (APA 7)
+
+> Se realizó un análisis de varianza de un factor para examinar el efecto del tratamiento en el peso seco de las plantas. Los resultados indicaron que **existe un efecto significativo del tratamiento**, *F*(2, 27) = 4.846, *p* = .016, η² = .26. Las medias y desviaciones estándar de los grupos fueron: control (*M* = 5.032, *DE* = 0.583), tratamiento 1 (*M* = 4.661, *DE* = 0.794) y tratamiento 2 (*M* = 5.526, *DE* = 0.443). El tamaño del efecto η² = .26 indica un efecto grande de los tratamientos sobre la variable dependiente (Cohen, 1988).
+
+---
+
+## 5. Supuestos y Alternativas
+
+| Supuesto violado    | Consecuencia                                                              | Alternativa recomendada                         |
+|:--------------------|:--------------------------------------------------------------------------|:------------------------------------------------|
+| Normalidad          | El estadístico F pierde robustez; p-valores inexactos                     | Prueba de Kruskal-Wallis (no paramétrica)        |
+| Homocedasticidad    | Inflación del error Tipo I; CME estima mal la varianza real               | Welch's ANOVA (ajusta grados de libertad)       |
+| Independencia       | Correlación entre residuos; modelo lineal inválido estructuralmente       | ANOVA de medidas repetidas o modelos mixtos     |
+
+En el presente estudio, los tres supuestos fueron satisfechos, confirmando que el ANOVA paramétrico de una vía es el método apropiado.
+
+---
+
+## 6. Conclusión
+
+Los resultados del análisis de varianza indicaron un efecto estadísticamente significativo del tratamiento sobre el peso seco de las plantas, *F*(2, 27) = 4.846, *p* = .016, η² = .26. El tratamiento 2 produjo el mayor peso seco promedio (*M* = 5.526 g), seguido por el grupo control (*M* = 5.032 g) y el tratamiento 1 (*M* = 4.661 g). Se rechaza la hipótesis nula de igualdad de medias a α = .05. Estos resultados sugieren que el tratamiento 2 tiene un efecto positivo sobre el crecimiento de las plantas en comparación con el control y el tratamiento 1.
 
 ---
 
