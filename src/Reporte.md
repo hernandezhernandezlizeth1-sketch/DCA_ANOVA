@@ -114,8 +114,6 @@ Los resultados del análisis de varianza indicaron un efecto estadísticamente s
 
 Cohen, J. (1988). *Statistical power analysis for the behavioral sciences* (2nd ed.). Lawrence Erlbaum Associates.
 
-R Core Team. (2023). *R: A language and environment for statistical computing*. R Foundation for Statistical Computing. https://www.R-project.org/
-
 Field, A. (2018). *Discovering statistics using IBM SPSS statistics* (5th ed.). SAGE Publications.
 
 Montgomery, D. C. (2017). *Design and analysis of experiments* (9th ed.). Wiley.
