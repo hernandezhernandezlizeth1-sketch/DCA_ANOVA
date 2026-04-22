@@ -111,24 +111,6 @@ Los resultados indicaron que **existe un efecto significativo del tratamiento**,
 
 ---
 
-### 3.4 Intervalos de confianza al 95%
-
-#### Figura 5 — Medias con intervalos de confianza al 95%
-
-![Intervalos de confianza](src/codigo/outputs/05_intervalos_confianza.png)
-
-*Nota.* Los puntos representan las medias observadas. Las barras de error son IC 95% con distribución *t*. La línea discontinua horizontal es la gran media (Ȳ.. = 5.073 g). La ausencia de solapamiento entre trt1 y trt2 es evidencia visual de diferencia significativa.
-
-Los IC al 95% fueron: control [4.615, 5.449], tratamiento 1 [4.093, 5.229] y tratamiento 2 [5.209, 5.843].
-
----
-
-## 4. Reporte Estadístico Formal (APA 7)
-
-> Se realizó un análisis de varianza de un factor para examinar el efecto del tratamiento en el peso seco de las plantas. Los resultados indicaron que **existe un efecto significativo del tratamiento**, *F*(2, 27) = 4.846, *p* = .016, η² = .26. Las medias y desviaciones estándar de los grupos fueron: control (*M* = 5.032, *DE* = 0.583), tratamiento 1 (*M* = 4.661, *DE* = 0.794) y tratamiento 2 (*M* = 5.526, *DE* = 0.443). El tamaño del efecto η² = .26 indica un efecto grande de los tratamientos sobre la variable dependiente (Cohen, 1988).
-
----
-
 ## 5. Supuestos y Alternativas
 
 | Supuesto violado    | Consecuencia                                                              | Alternativa recomendada                         |

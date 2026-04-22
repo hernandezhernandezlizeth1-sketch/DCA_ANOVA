@@ -147,8 +147,7 @@ def main():
         "01_boxplot_comparativo.png",
         "02_histogramas_densidad.png",
         "03_qqplots_normalidad.png",
-        "04_distribucion_F_fisher.png",
-        "05_intervalos_confianza.png"
+        "04_distribucion_F_fisher.png"
     ]
     for g in graficos:
         print(f"  • outputs/{g}")

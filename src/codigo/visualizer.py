@@ -9,7 +9,6 @@ Propósito: FASE 5 (Waterfall) - Implementación de visualizaciones.
              2. Histogramas con curva de densidad
              3. Q-Q plots de normalidad
              4. Distribución F con zonas de rechazo
-             5. Intervalos de confianza de medias
            Todos los gráficos se guardan en la carpeta outputs/.
 =============================================================================
 """
@@ -39,7 +38,7 @@ class Visualizer:
 
     Atributos:
         grupos_data (dict): Arrays de datos por grupo
-        desc_resultados (dict): Estadísticos descriptivos (para IC)
+        desc_resultados (dict): Estadísticos descriptivos
         anova_resultados (dict): Resultados del ANOVA (para F plot)
     """
 
@@ -357,81 +356,6 @@ class Visualizer:
             plt.show()
 
     # =========================================================================
-    # GRÁFICO 5: INTERVALOS DE CONFIANZA DE LAS MEDIAS
-    # =========================================================================
-    def intervalos_confianza(self, mostrar=False):
-        """
-        Gráfico de medias con intervalos de confianza al 95%.
-
-        Muestra para cada grupo:
-          - Punto: media observada (Ȳᵢ)
-          - Barra de error: IC 95% = Ȳᵢ ± t(α/2, n-1) × (s/√n)
-          - Línea discontinua: gran media (referencia global)
-
-        Si los intervalos de grupos distintos no se solapan →
-        evidencia visual de diferencias significativas entre esas medias.
-        """
-        if not self.desc_resultados:
-            print("  ⚠ Requiere resultados descriptivos.")
-            return
-
-        fig, ax = plt.subplots(figsize=(8, 5))
-
-        # Gran media (referencia horizontal)
-        gran_media = np.mean(
-            np.concatenate([self.grupos_data[g] for g in GRUPOS])
-        )
-        ax.axhline(gran_media, color="gray", linestyle=":", linewidth=1.5,
-                   alpha=0.8, label=f"Gran media = {gran_media:.4f}")
-
-        x_pos = np.arange(len(GRUPOS))  # Posiciones en eje x
-
-        for i, grupo in enumerate(GRUPOS):
-            r = self.desc_resultados[grupo]
-            media = r["media"]
-            ic_inf = r["ic_inferior"]
-            ic_sup = r["ic_superior"]
-
-            # Longitud de la barra de error (semiancho del IC)
-            error_low = media - ic_inf   # Distancia hacia abajo
-            error_high = ic_sup - media  # Distancia hacia arriba
-
-            # Punto de la media
-            ax.scatter(i, media, color=COLORES[grupo], s=120,
-                       zorder=5, edgecolors="white", linewidths=1)
-
-            # Barra de error del IC 95%
-            ax.errorbar(i, media,
-                        yerr=[[error_low], [error_high]],
-                        fmt="none",
-                        color=COLORES[grupo], capsize=8,
-                        capthick=2, linewidth=2.5)
-
-            # Etiqueta con valor exacto de la media
-            ax.text(i, ic_sup + 0.05, f"Ȳ = {media:.3f}",
-                    ha="center", va="bottom", fontsize=9,
-                    color=COLORES[grupo], fontweight="bold")
-
-            # Etiqueta del IC
-            ax.text(i + 0.25, media,
-                    f"[{ic_inf:.2f}, {ic_sup:.2f}]",
-                    ha="left", va="center", fontsize=8, color="gray")
-
-        ax.set_xticks(x_pos)
-        ax.set_xticklabels([ETIQUETAS_GRUPOS[g] for g in GRUPOS])
-        ax.set_ylabel("Peso seco (g)")
-        ax.set_xlabel("Grupo de tratamiento")
-        ax.set_title(f"Medias con Intervalos de Confianza al {int((1-ALPHA)*100)}%\n"
-                     "PlantGrowth Dataset", fontweight="bold", pad=12)
-        ax.legend(loc="lower right", framealpha=0.9)
-
-        plt.tight_layout()
-        self._guardar(fig, "05_intervalos_confianza.png")
-
-        if mostrar:
-            plt.show()
-
-    # =========================================================================
     # MÉTODO PRINCIPAL: GENERAR TODOS LOS GRÁFICOS
     # =========================================================================
     def generar_todos(self, mostrar=False):
@@ -450,5 +374,4 @@ class Visualizer:
         self.histogramas_densidad(mostrar)
         self.qqplots_normalidad(mostrar)
         self.distribucion_f(mostrar)
-        self.intervalos_confianza(mostrar)
         print(f"\n✓ Todos los gráficos guardados en: {OUTPUT_DIR}\n")
