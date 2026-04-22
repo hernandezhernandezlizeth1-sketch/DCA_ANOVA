@@ -58,7 +58,7 @@ Las medias observadas sugieren que el tratamiento 2 produjo plantas con mayor pe
 
 #### Figura 1 — Comparación de peso seco por tratamiento (Boxplot)
 
-![Boxplot comparativo](src/codigo/outputs/01_boxplot_comparativo.png)
+![Boxplot comparativo](codigo/outputs/01_boxplot_comparativo.png)
 
 *Nota.* Cada caja representa el rango intercuartílico (Q1–Q3). La línea central es la mediana. Las muescas indican el IC 95% de la mediana. Los puntos superpuestos corresponden a las observaciones individuales. La ausencia de solapamiento entre las muescas de trt1 y trt2 sugiere diferencia significativa entre sus medianas.
 
@@ -66,7 +66,7 @@ Las medias observadas sugieren que el tratamiento 2 produjo plantas con mayor pe
 
 #### Figura 2 — Distribución del peso seco por grupo (Histogramas + KDE)
 
-![Histogramas con densidad](src/codigo/outputs/02_histogramas_densidad.png)
+![Histogramas con densidad](codigo/outputs/02_histogramas_densidad.png)
 
 *Nota.* La curva superpuesta corresponde a la estimación de densidad por kernel (KDE) con ancho de banda de Scott. La línea discontinua vertical indica la media del grupo. La forma aproximadamente simétrica y unimodal en los tres grupos es consistente con el supuesto de normalidad.
 
@@ -76,7 +76,7 @@ Las medias observadas sugieren que el tratamiento 2 produjo plantas con mayor pe
 
 #### Figura 3 — Q-Q Plots de normalidad por grupo
 
-![QQ Plots](src/codigo/outputs/03_qqplots_normalidad.png)
+![QQ Plots](codigo/outputs/03_qqplots_normalidad.png)
 
 *Nota.* Los puntos representan los cuantiles observados versus los cuantiles teóricos de una distribución normal estándar. El alineamiento sobre la línea de referencia diagonal indica normalidad. Los valores R² elevados confirman el buen ajuste.
 
@@ -103,7 +103,7 @@ Las medias observadas sugieren que el tratamiento 2 produjo plantas con mayor pe
 
 #### Figura 4 — Distribución F de Fisher con zonas de decisión
 
-![Distribución F](src/codigo/outputs/04_distribucion_F_fisher.png)
+![Distribución F](codigo/outputs/04_distribucion_F_fisher.png)
 
 *Nota.* La zona sombreada en rojo representa la región de rechazo (α = .05). La línea azul sólida indica el estadístico F calculado (F = 4.846). La línea roja discontinua indica el valor crítico F_c = 3.354. Dado que F calculado > F crítico, se rechaza H₀.
 
