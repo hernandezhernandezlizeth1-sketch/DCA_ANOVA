@@ -228,6 +228,39 @@ Para ello, el estadístico de prueba empírico se define como el cociente entre 
   <img src="https://latex.codecogs.com/svg.image?F=\frac{CM_{Trat}}{CM_{Error}}=\frac{SCTr/(k-1)}{SCE/(N-k)}" title="Fórmula del Estadístico F" />
 </div>
 
+### 6.1 Desglose del Cálculo Manual
+
+Para validar la solidez del modelo, se ejecutó un cálculo analítico paso a paso partiendo de los estadísticos base ($N = 30$, $k = 3$, $n_i = 10$).
+
+**Paso 1: Grados de Libertad (GL)**
+* $GL_{Trat} = k - 1 = 3 - 1 = 2$
+* $GL_{Total} = N - 1 = 30 - 1 = 29$
+* $GL_{Error} = N - k = 30 - 3 = 27$
+
+**Paso 2: Sumas de Cuadrados (SC)**
+* $SCTr = \Sigma n_i (\bar{Y}_{i.} - \bar{Y}_{..})^2 = 10(5.032 - 5.073)^2 + 10(4.661 - 5.073)^2 + 10(5.526 - 5.073)^2 = 3.7663$
+* $SCE = \Sigma (n_i - 1) S_i^2 = 9(0.3401) + 9(0.6298) + 9(0.1958) = 10.4921$
+* $SCT = SCTr + SCE = 3.7663 + 10.4921 = 14.2584$
+
+**Paso 3: Cuadrados Medios (CM)**
+* $CM_{Trat} = \frac{SCTr}{GL_{Trat}} = \frac{3.7663}{2} = 1.8832$
+* $CM_{Error} = \frac{SCE}{GL_{Error}} = \frac{10.4921}{27} = 0.3886$
+
+**Paso 4: Estadístico *F* Empírico**
+* $F = \frac{CM_{Trat}}{CM_{Error}} = \frac{1.8832}{0.3886} = 4.846$
+
+### 6.2 Verificación con Software y Tabla ANOVA
+
+Los cálculos analíticos fueron confirmados mediante la ejecución de la rutina computacional `scipy.stats.f_oneway`, arrojando una concordancia matemática perfecta con los valores manuales:
+
+```python
+# Verificación con SciPy
+import scipy.stats as stats
+F_scipy, p_scipy = stats.f_oneway(datos_ctrl, datos_trt1, datos_trt2)
+print(f"SciPy: F = {F_scipy:.6f}, p = {p_scipy:.6f}")
+# Output: SciPy: F = 4.846088, p = 0.015910
+```
+
 **Tabla 2** *Tabla del Análisis de Varianza (ANOVA) para la variable Biomasa Seca*
 
 | Fuente de Variación | Grados de Libertad (GL) | Suma de Cuadrados (SC) | Cuadrado Medio (CM) | Estadístico F | Valor p | η² |
@@ -238,7 +271,7 @@ Para ello, el estadístico de prueba empírico se define como el cociente entre 
 
 *Nota:* Valor Crítico $F_{crit}(2, 27)$ para $\alpha = .05$ es igual a $3.354$.
 
-### 6.1 Implementación Computacional y Regla de Decisión
+### 6.3 Implementación Computacional y Regla de Decisión
 
 ```python
 # Cálculo y visualización de la Región de Rechazo del Estadístico F
@@ -294,6 +327,12 @@ El análisis revela que el Tratamiento 2 produce significativamente más biomasa
 
 ### Discusión
 Los datos proporcionan evidencia sobre la modulación del crecimiento vegetal mediante agentes exógenos. La inferioridad del Tratamiento 1 sugiere un ambiente subóptimo para el metabolismo basal de la planta. En contraste, el Tratamiento 2 logra elevar el techo productivo de la biomasa de manera homogénea. Entre las limitaciones destaca el tamaño de muestra (*n* = 10), el cual limita el poder estadístico en comparaciones cruzadas frente al control. Se recomienda transitar a Diseños de Bloques en etapas futuras.
+
+### Alternativas ante Violación de Supuestos
+En caso de que futuros experimentos con estos tratamientos no cumplan los supuestos paramétricos verificados en la Sección 5, se establecen las siguientes rutas de contingencia metodológica:
+* **Si se viola la Normalidad:** El estadístico F pierde robustez. Se deberá utilizar la **Prueba de Kruskal-Wallis**, la cual es una alternativa no paramétrica que evalúa las diferencias en las medianas basándose en los rangos de los datos, sin asumir una distribución específica.
+* **Si se viola la Homocedasticidad:** La inflación del error Tipo I compromete el modelo. La alternativa es utilizar el **ANOVA de Welch** (Welch's ANOVA), el cual ajusta dinámicamente los grados de libertad del denominador para compensar la desigualdad de varianzas entre los grupos.
+* **Si se viola la Independencia:** Sugeriría un fallo de diseño (ej. mediciones repetidas en la misma planta a lo largo del tiempo). Se tendría que reestructurar el análisis utilizando un **ANOVA de Medidas Repetidas** o Modelos Mixtos para aislar el error intra-sujeto.
 
 ### Conclusiones
 Con base en el rigor metodológico aplicado, se realizó un análisis de varianza de un factor para examinar el efecto del tratamiento en el peso seco de las plantas. Los resultados indicaron que existe un efecto significativo del tratamiento, *F*(2, 27) = 4.85, *p* = .016, $\eta^2$ = .26. El análisis post-hoc determinó específicamente que el Tratamiento 2 es estadísticamente superior al Tratamiento 1. Se concluye que el protocolo del Tratamiento 2 es el óptimo para una potencial escalabilidad agronómica.
